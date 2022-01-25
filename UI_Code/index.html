@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Song Recommedation</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link href='https://css.gg/play-button.css' rel='stylesheet'>
+<link rel="stylesheet" href="/static/style.css">
+  
+</head>
+<style>
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+.output{
+color:black;
+font-size : 14px;
+align:center
+}
+.play {
+  box-sizing: border-box;
+  height: 74px;
+  
+  border-color: lightblue transparent lightblue #202020;
+  transition: 100ms all ease;
+  will-change: border-width;
+  cursor: pointer;
+
+  // play state
+  border-style: solid;
+  border-width: 37px 0 37px 60px;
+}
+</style>
+
+<body style="background: lightblue ; text-align:center; overflow:scroll;">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+
+ <script>
+  function go(id) {
+   var link_track = "https://open.spotify.com/embed/track/" + String(id);
+    document.getElementById('iframe').src =  link_track;
+  }
+  
+
+ </script>
+
+ <div class="content">
+	<h1 style="color:black; font-size : 50px;">Song Recommendation Sytem</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('song_add')}}"method="post">
+    	<input type="text" name="songid" placeholder = "songid" required="required" />
+        
+        <button type="submit" class="btn btn-primary btn-block btn-large">Add Song to list</button>
+		 
+    </form>
+	 <br />
+	 
+<form action="{{ url_for('recommend')}}"method="post" enctype = "multipart/form-data">
+      
+         <input type = "file" name = "file"  required="required" />   
+        <button type="submit" class="btn btn-primary btn-block btn-large">Playlist</button>
+		 
+    </form> 
+
+   <br>
+   <br>
+   <div class = "output">
+   {{ prediction_text }}  
+   </div>
+   <div class = "output">
+   {{ expression}}
+   </div>
+    <div class = "output">
+	<!-- Spotify Widgets which provides an embeddable view of a track within the web project inorder to play the track-->
+	<iframe id="iframe" src="about:blank" width="300" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <table>
+         <tbody>
+         {% for id, name, mood in list_Songs %}
+		    
+             <tr>
+			 <td>{{ name }}</td>	 
+			 <td><button  onclick = "go('{{id}}')" class="gg-play-button"></button></td>
+
+		 </tr>
+         {% endfor %}
+         </tbody>
+     </table>
+
+   </div>
+
+ </div>
+</body>
+</html>

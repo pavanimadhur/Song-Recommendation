@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>list of songs</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link href='https://css.gg/play-button.css' rel='stylesheet'>
+<link rel="stylesheet" href="/static/style.css">
+  
+</head>
+<style>
+.content {
+  max-width: 500px;
+  margin: auto;
+  align:center;
+  text-align:center;
+  
+}
+.output{
+color:black;
+font-size : 14px;
+align:center;
+text-align:center;
+}
+.play {
+  box-sizing: border-box;
+  height: 74px;
+  
+  border-color: lightblue transparent lightblue #202020;
+  transition: 100ms all ease;
+  will-change: border-width;
+  cursor: pointer;
+
+  // play state
+  border-style: solid;
+  border-width: 37px 0 37px 60px;
+}
+</style>
+
+<body style="background: lightblue ; text-align:center; overflow:scroll;">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script type="text/javascript"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+
+ <script>
+  function go(id) {
+   console.log("Inside")
+   var link_track = "https://open.spotify.com/embed/track/" + String(id);
+    console.log(link_track);
+    document.getElementById('iframe').src =  link_track;
+  }
+  
+
+ </script>
+
+ <div class="content"> 
+	<h1 style="color:black; font-size : 50px;">Playlist</h1>
+	<p class="output"> <a class="output" href="http://127.0.0.1:5000/"> Go back to RecommendationSystem </a></p>
+<br>
+   <div class = "output">
+   {{ expression }}
+   </div >
+	    <div class = "output">
+        <table>
+         <tbody>
+         {% for id, name, mood in list_Songs %}		    
+             <tr>
+			 <td>{{ name }}</td>	 
+			 <td><button  onclick = "go('{{id}}')" class="gg-play-button"></button></td>			 
+		 </tr>
+         {% endfor %}
+         </tbody>
+     </table>
+	 <iframe id="iframe" src="about:blank" width="600" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+
+   </div>
+
+ </div>
+</body>
+</html>
