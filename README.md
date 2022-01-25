@@ -1,6 +1,6 @@
-# Song-Recommendation
-Music Recommendation system based on the User's Mood
-Music plays a significant part in one’s life. It is 
+# Music Recommendation system based on the User's Mood.
+
+   Music plays a significant part in one’s life. It is 
 known to uplift the mood of a person. Analyzing the expression of 
 an individual would help to understand the emotion one is going 
 through. Many users have a playlist so large that they are unable 
